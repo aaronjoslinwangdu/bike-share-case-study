@@ -97,30 +97,52 @@ Now, onto the analysis!
 
 ## Analysis
 
+Check the mean, median, max, min of **ride_length_seconds**.
+
 ```
-#check mean, median, max, min of ride_length_seconds
-
 summary(bike_rides_v2$ride_length_seconds)
+```
 
-#compare above measures between members and casual users
+Compare the above measures between members and casual users
 
+```
 aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = mean)
 aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = median)
 aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = max)
 aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = min)
+```
 
-#find average ride time by each day for members vs. casual
+Find the average ride time by each day for members vs. casuals.
 
+```
 aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual + bike_rides_v2$day_of_week, FUN = mean)
+```
 
-#analyze ridership data by type and weekday
+Here, we analyze ridership data by type and weekday
 
+```
 bike_rides_v2 %>% 
   mutate(weekday = wday(started_at,label = TRUE)) %>%  #creates weekday field using wday()
   group_by(member_casual,weekday) %>%  #groups by user type and weekday
   summarize(number_of_rides = n(), average_duration = mean(ride_length_seconds)) %>%  #calculations
   arrange(weekday)  
 ```
+
+Check how many trips there are each day with each type of bike for members vs. casuals.
+
+```
+bike_rides_v2 %>% 
+  count(member_casual,day_of_week, rideable_type)
+```
+
+Check how the times that casuals/members start trips are different.
+
+```
+bike_rides_v2 %>% 
+  count(member_casual,start_hour)
+
+```
+
 
 ## Visualizations
 
@@ -129,6 +151,7 @@ bike_rides_v2 %>%
 ![number_of_rides_by_rider_type](https://github.com/aaronjoslinwangdu/bike-share-case-study/blob/master/Visualizations/number_of_rides_by_rider_type.png)
 ---
 ![rides_every_hour](https://github.com/aaronjoslinwangdu/bike-share-case-study/blob/master/Visualizations/rides_every_hour.png)
+---
 
 ## Conclusion
 
