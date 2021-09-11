@@ -1,10 +1,10 @@
 # Divvy Case Study
 
-##Introduction
+## Introduction
 
 For this case study I am going to be analyzing data from [Divvy,](https://www.divvybikes.com) a bike share program based in Chicago. Divvy
 
-##What is the point of this case study?
+## What is the point of this case study?
 
 My goal is to identify the differences between casual users and members, and 
 
