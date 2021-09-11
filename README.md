@@ -97,8 +97,6 @@ Now, onto the analysis!
 
 ## Analysis
 
-Here is the analysis that I did, refer to the comments.
-
 ```
 #check mean, median, max, min of ride_length_seconds
 
@@ -124,6 +122,9 @@ bike_rides_v2 %>%
   arrange(weekday)  
 ```
 
+## Visualizations
+
+![Viz 1](https://github.com/aaronjoslinwangdu/bike-share-case-study/blob/master/Visualizations/avg_duration_per_day.png)
 
 
 
