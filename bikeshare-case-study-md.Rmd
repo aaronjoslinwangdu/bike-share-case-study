@@ -1,6 +1,6 @@
 ---
-title: "bikeshare-case-study-markdown"
-author: "Aaron Joslin-Wangdu"
+title: "Bikeshare Case Study"
+author: "By Aaron Joslin-Wangdu - "
 date: "9/11/2021"
 output: rmarkdown::github_document
 ---
@@ -22,7 +22,7 @@ The datasets I used are public and can be found in the [Archive folder](https://
 
 First, I installed and loaded all of the necessary packages for preparing and cleaning the data.
 
-```{r install,results="hide"}
+```{r loadlib, echo=T,results='hide',message=F,warning=F}
 install.packages("tidyverse",repos = 'http://cran.us.r-project.org')
 install.packages("janitor",repos = 'http://cran.us.r-project.org')
 install.packages("lubridate",repos = 'http://cran.us.r-project.org')
