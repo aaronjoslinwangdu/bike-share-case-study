@@ -130,6 +130,8 @@ bike_rides_v2 %>%
 ---
 ![rides_every_hour](https://github.com/aaronjoslinwangdu/bike-share-case-study/blob/master/Visualizations/rides_every_hour.png)
 
+## Conclusion
+
 
 
 
