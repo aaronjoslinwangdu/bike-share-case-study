@@ -22,7 +22,7 @@ The datasets I used are public and can be found in the [Archive folder](https://
 
 First, I installed and loaded all of the necessary packages for preparing and cleaning the data.
 
-```{r loadlib, echo=TRUE,results='hide',message=FALSE,warning=FALSE}
+```{r loadlib, results='hide', message=FALSE, warning=FALSE}
 install.packages("tidyverse",repos = 'http://cran.us.r-project.org')
 install.packages("janitor",repos = 'http://cran.us.r-project.org')
 install.packages("lubridate",repos = 'http://cran.us.r-project.org')
