@@ -26,7 +26,6 @@ library(lubridate)
 library(scales)
 ```
 
-
 Then I imported all of the .csv files, added them to separate dataframes, and combined them into one dataframe called **bike_rides**.
 
 ```
