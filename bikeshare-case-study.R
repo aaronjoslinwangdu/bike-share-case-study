@@ -116,13 +116,14 @@ bike_rides_v2 %>%
 #plot number of rides started at each hour of the day
 
 bike_rides_v2 %>% 
-  count(start_hour) %>% 
-  ggplot() + geom_line(aes(x=start_hour,y=n)) + 
-  labs(title="Number of Rides Every Hour", x="Starting Hour", y="Number of Rides") +
-  scale_y_continuous(labels = comma) + scale_x_continuous(n.breaks = 22)
+  count(member_casual,start_hour) %>% 
+  ggplot(aes(x=start_hour,y=n,group=member_casual,color=member_casual)) +
+  geom_line(size=1.3) +
+  labs(title="Number of Rides Started Every Hour", x="Starting Hour", y="Number of Rides") +
+  scale_y_continuous(labels = comma) + scale_x_continuous(n.breaks = 22) +
+  scale_color_discrete(name="Rider Type")       #change legend title
 
   ggsave("./Visualizations/rides_every_hour.png")
-
   
 #visualize average ride duration for members vs. casuals
 
@@ -143,7 +144,7 @@ bike_rides_v2 %>%
 #visualize number of rides by rider type
   
 bike_rides_v2 %>% 
-  mutate(weekday = wday(started_at),label=TRUE) %>% 
+  mutate(weekday = wday(started_at,label=TRUE)) %>% 
   group_by(member_casual,weekday) %>% 
   summarize(number_of_rides = n(),average_duration=mean(ride_length_seconds)) %>% 
   arrange(member_casual,weekday) %>% 
