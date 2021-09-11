@@ -91,14 +91,14 @@ summary(bike_rides_v2$ride_length_seconds)
 
 #compare above measures between members and casual users
 
-aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = mean)
-aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = median)
-aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = max)
-aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = min)
+setNames(aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = mean),c("Membership Type","Mean Ride Length (seconds)"))
+setNames(aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = median),c("Membership Type","Median Ride Length (seconds)"))
+setNames(aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = max),c("Membership Type","Max Ride Length (seconds)"))
+setNames(aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = min),c("Membership Type","Min Ride Length (seconds)"))
 
 #find average ride time by each day for members vs. casual
 
-aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual + bike_rides_v2$day_of_week, FUN = mean)
+setNames(aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual + bike_rides_v2$day_of_week, FUN = mean),c("Membership Type","Weekday","Avg. Daily Ride (seconds)"))
 
 #analyze ridership data by type and weekday
 

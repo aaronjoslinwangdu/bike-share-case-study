@@ -1,6 +1,6 @@
-bikeshare-case-study-markdown
+Bikeshare Case Study
 ================
-Aaron Joslin-Wangdu
+By Aaron Joslin-Wangdu -
 9/11/2021
 
 # Introduction
@@ -35,69 +35,11 @@ preparing and cleaning the data.
 install.packages("tidyverse",repos = 'http://cran.us.r-project.org')
 install.packages("janitor",repos = 'http://cran.us.r-project.org')
 install.packages("lubridate",repos = 'http://cran.us.r-project.org')
-```
-
-    ## Warning: cannot remove prior installation of package 'lubridate'
-
-    ## Warning in file.copy(savedcopy, lib, recursive = TRUE): problem copying C:
-    ## \Users\arkansas\Documents\R\R-4.1.1\library\00LOCK\lubridate\libs\x64\lubridate.dll
-    ## to C:
-    ## \Users\arkansas\Documents\R\R-4.1.1\library\lubridate\libs\x64\lubridate.dll:
-    ## Permission denied
-
-    ## Warning: restored 'lubridate'
-
-``` r
 library(tidyverse)
-```
-
-    ## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
-
-    ## v ggplot2 3.3.5     v purrr   0.3.4
-    ## v tibble  3.1.4     v dplyr   1.0.7
-    ## v tidyr   1.1.3     v stringr 1.4.0
-    ## v readr   2.0.1     v forcats 0.5.1
-
-    ## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
-    ## x dplyr::filter() masks stats::filter()
-    ## x dplyr::lag()    masks stats::lag()
-
-``` r
 library(janitor)
-```
-
-    ## 
-    ## Attaching package: 'janitor'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     chisq.test, fisher.test
-
-``` r
 library(lubridate)
-```
-
-    ## 
-    ## Attaching package: 'lubridate'
-
-    ## The following objects are masked from 'package:base':
-    ## 
-    ##     date, intersect, setdiff, union
-
-``` r
 library(scales)
 ```
-
-    ## 
-    ## Attaching package: 'scales'
-
-    ## The following object is masked from 'package:purrr':
-    ## 
-    ##     discard
-
-    ## The following object is masked from 'package:readr':
-    ## 
-    ##     col_factor
 
 Then I imported all of the .csv files, added them to separate
 dataframes, and combined them into one dataframe called **bike\_rides**.
@@ -192,73 +134,58 @@ summary(bike_rides_v2$ride_length_seconds)
 Compare the above measures between members and casual users
 
 ``` r
-aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = mean)
+setNames(aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = mean),c("Membership Type","Mean Ride Length (seconds)"))
 ```
 
-    ##   bike_rides_v2$member_casual bike_rides_v2$ride_length_seconds
-    ## 1                      casual                         2424.4657
-    ## 2                      member                          953.5629
+    ##   Membership Type Mean Ride Length (seconds)
+    ## 1          casual                  2424.4657
+    ## 2          member                   953.5629
 
 ``` r
-aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = median)
+setNames(aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = median),c("Membership Type","Median Ride Length (seconds)"))
 ```
 
-    ##   bike_rides_v2$member_casual bike_rides_v2$ride_length_seconds
-    ## 1                      casual                              1272
-    ## 2                      member                               689
+    ##   Membership Type Median Ride Length (seconds)
+    ## 1          casual                         1272
+    ## 2          member                          689
 
 ``` r
-aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = max)
+setNames(aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = max),c("Membership Type","Max Ride Length (seconds)"))
 ```
 
-    ##   bike_rides_v2$member_casual bike_rides_v2$ride_length_seconds
-    ## 1                      casual                            602760
-    ## 2                      member                            595314
+    ##   Membership Type Max Ride Length (seconds)
+    ## 1          casual                    602760
+    ## 2          member                    595314
 
 ``` r
-aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = min)
+setNames(aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = min),c("Membership Type","Min Ride Length (seconds)"))
 ```
 
-    ##   bike_rides_v2$member_casual bike_rides_v2$ride_length_seconds
-    ## 1                      casual                                 0
-    ## 2                      member                                 0
+    ##   Membership Type Min Ride Length (seconds)
+    ## 1          casual                         0
+    ## 2          member                         0
 
 Find the average ride time by each day for members vs. casuals.
 
 ``` r
-aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual + bike_rides_v2$day_of_week, FUN = mean)
+setNames(aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual + bike_rides_v2$day_of_week, FUN = mean),c("Membership Type","Weekday","Avg. Daily Ride (seconds)"))
 ```
 
-    ##    bike_rides_v2$member_casual bike_rides_v2$day_of_week
-    ## 1                       casual                    Sunday
-    ## 2                       member                    Sunday
-    ## 3                       casual                    Monday
-    ## 4                       member                    Monday
-    ## 5                       casual                   Tuesday
-    ## 6                       member                   Tuesday
-    ## 7                       casual                 Wednesday
-    ## 8                       member                 Wednesday
-    ## 9                       casual                  Thursday
-    ## 10                      member                  Thursday
-    ## 11                      casual                    Friday
-    ## 12                      member                    Friday
-    ## 13                      casual                  Saturday
-    ## 14                      member                  Saturday
-    ##    bike_rides_v2$ride_length_seconds
-    ## 1                          2694.2041
-    ## 2                          1057.9720
-    ## 3                          2446.0918
-    ## 4                           903.9466
-    ## 5                          2228.6534
-    ## 6                           902.4670
-    ## 7                          2183.0945
-    ## 8                           904.9901
-    ## 9                          2233.8757
-    ## 10                          902.5775
-    ## 11                         2302.0529
-    ## 12                          945.7863
-    ## 13                         2573.4333
-    ## 14                         1054.5039
+    ##    Membership Type   Weekday Avg. Daily Ride (seconds)
+    ## 1           casual    Sunday                 2694.2041
+    ## 2           member    Sunday                 1057.9720
+    ## 3           casual    Monday                 2446.0918
+    ## 4           member    Monday                  903.9466
+    ## 5           casual   Tuesday                 2228.6534
+    ## 6           member   Tuesday                  902.4670
+    ## 7           casual Wednesday                 2183.0945
+    ## 8           member Wednesday                  904.9901
+    ## 9           casual  Thursday                 2233.8757
+    ## 10          member  Thursday                  902.5775
+    ## 11          casual    Friday                 2302.0529
+    ## 12          member    Friday                  945.7863
+    ## 13          casual  Saturday                 2573.4333
+    ## 14          member  Saturday                 1054.5039
 
 Here, we analyze ridership data by type and weekday
 

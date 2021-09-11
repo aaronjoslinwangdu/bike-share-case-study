@@ -4,6 +4,7 @@ author: "By Aaron Joslin-Wangdu - "
 date: "9/11/2021"
 output: rmarkdown::github_document
 ---
+
 # Introduction
 
 For this case study I am going to be analyzing data from [Divvy,](https://www.divvybikes.com) a bike share program based in Chicago. Divvy has a fleet of nearly 6,000 bicycles which are geotracked and rode within a network of 692 stations throughout Chicago. This case study was my Capstone project for the Google Data Analytics Professional Certificate, and was done entirely in RStudio.
@@ -11,8 +12,8 @@ For this case study I am going to be analyzing data from [Divvy,](https://www.di
 ## What is the point of this case study?
 
 The questions that I am using to guide my study are:
-  * How do annual members and casual riders use Divvy bikes differently?
-  * Why would casual riders buy Divvy annual membership?
+1. How do annual members and casual riders use Divvy bikes differently?
+2. Why would casual riders buy Divvy annual membership?
 
 ## The Data
 
@@ -112,16 +113,16 @@ summary(bike_rides_v2$ride_length_seconds)
 Compare the above measures between members and casual users
 
 ```{r aggregate_mem_vs_cas}
-aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = mean)
-aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = median)
-aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = max)
-aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = min)
+setNames(aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = mean),c("Membership Type","Mean Ride Length (seconds)"))
+setNames(aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = median),c("Membership Type","Median Ride Length (seconds)"))
+setNames(aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = max),c("Membership Type","Max Ride Length (seconds)"))
+setNames(aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = min),c("Membership Type","Min Ride Length (seconds)"))
 ```
 
 Find the average ride time by each day for members vs. casuals.
 
 ```{r ride_time_per_day_mem_vs_cas}
-aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual + bike_rides_v2$day_of_week, FUN = mean)
+setNames(aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual + bike_rides_v2$day_of_week, FUN = mean),c("Membership Type","Weekday","Avg. Daily Ride (seconds)"))
 ```
 
 Here, we analyze ridership data by type and weekday
