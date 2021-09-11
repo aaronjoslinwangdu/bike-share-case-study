@@ -4,7 +4,7 @@ For this case study I am going to be analyzing data from [Divvy,](https://www.di
 
 ## What is the point of this case study?
 
-The questions that I am using to quide my study are:
+The questions that I am using to guide my study are:
 1. How do annual members and casual riders use Divvy bikes differently?
 2. Why would casual riders buy Divvy annual membership?
 
