@@ -137,21 +137,17 @@ bike_rides_v2 %>%
   labs(fill="Rider Type")  
 
   ggsave("./Visualizations/avg_duration_per_day.png")
-  
-  
+
+
 #visualize number of rides by rider type
-  
+
 bike_rides_v2 %>% 
-  mutate(weekday = wday(started_at,label=TRUE)) %>% 
-  group_by(member_casual,weekday) %>% 
-  summarize(number_of_rides = n(),average_duration=mean(ride_length_seconds)) %>% 
-  arrange(member_casual,weekday) %>% 
-  
-  ggplot(aes(x=weekday,y=number_of_rides,fill=member_casual)) +
-  geom_col(position="dodge") +
+  ggplot() + geom_bar(mapping=aes(x=day_of_week,fill=rideable_type)) +
+  facet_wrap(~member_casual) +
   labs(title="Number of Rides by Rider Type",x="Day of the Week",y="Number of Rides") +
-  scale_y_continuous(labels = comma) +      #change from scientific notation on y-axis
-  labs(fill="Rider Type")                   #change legend title
+  scale_y_continuous(labels = comma) +     
+  theme(axis.text.x=element_text(angle=45,hjust=1)) +
+  labs(fill="Type of Bike")           
   
   ggsave("./Visualizations/number_of_rides_by_rider_type.png")  
   
