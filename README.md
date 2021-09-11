@@ -1,6 +1,6 @@
 # Introduction
 
-For this case study I am going to be analyzing data from [Divvy,](https://www.divvybikes.com) a bike share program based in Chicago. Divvy has a fleet of nearly 6,000 bicycles which are geotracked and rode within a network of 692 stations throughout Chicago. 
+For this case study I am going to be analyzing data from [Divvy,](https://www.divvybikes.com) a bike share program based in Chicago. Divvy has a fleet of nearly 6,000 bicycles which are geotracked and rode within a network of 692 stations throughout Chicago. This case study was my Capstone project for the Google Data Analytics Professional Certificate, and was done entirely in RStudio.
 
 ## What is the point of this case study?
 
@@ -81,10 +81,10 @@ bike_rides$ride_length_seconds <- difftime(bike_rides$ended_at,bike_rides$starte
 bike_rides$ride_length_seconds <- as.numeric(as.character(bike_rides$ride_length_seconds))
 ```
 
-It was specified by the source that certain data was faulty/irrelevant, so I removed it and created a separate, final dataframe called **bike_rides_v2**.
+It was specified by the source that certain data was faulty/irrelevant, so I removed that data as well as negative/extremely high values for **ride_length_seconds** and created a separate, final dataframe called **bike_rides_v2**.
 
 ```
-bike_rides_v2 <- bike_rides[!(bike_rides$start_station_name == "HQ QR" | bike_rides$ride_length_seconds<0),]
+bike_rides_v2 <- bike_rides[!(bike_rides$start_station_name == "HQ QR" | bike_rides$ride_length_seconds<0 | bike_rides$ride_length_seconds>604800),]
 ```
 
 Finally, I corrected the order of the days of the week so my visualizations would be more intuitive.
@@ -95,6 +95,15 @@ bike_rides_v2$day_of_week <- ordered(bike_rides_v2$day_of_week, levels=c("Sunday
 
 Now, onto the analysis!
 
+## Analysis
+
+One of my goals was to find the differences in use between members and casual riders, so let's look into that first.
+
+First, I checked the mean, median, max, and min of the ride lengths.
+
+```
+summary(bike_rides_v2$ride_length_seconds)
+```
 
 
 
