@@ -45,14 +45,12 @@ df12 <- read.csv("./Data/202103-divvy-tripdata.csv")
 bike_rides <- rbind(df1,df2,df3,df4,df5,df6,df7,df8,df9,df10,df11,df12)
 ```
 
-
 The first step I took to clean the data was removing any empty rows or columns from **bike_rides**.
 
 ```
 bike_rides <- janitor::remove_empty(bike_rides,which = c("cols"))
 bike_rides <- janitor::remove_empty(bike_rides,which = c("rows"))
 ```
-
 
 Since the **started_at** and **ended_at** columns represent dates, I converted them into the correct data type.
 
@@ -61,13 +59,41 @@ bike_rides$started_at <- lubridate::ymd_hms(bike_rides$started_at)
 bike_rides$ended_at <- lubridate::ymd_hms(bike_rides$ended_at)
 ```
 
+Then I used the **started_at** and **ended_at** columns to create separate columns for the day of the week, starting hour, month, etc. that each trip occurred on.
 
+```
+bike_rides$start_hour <- lubridate::hour(bike_rides$started_at)
+bike_rides$end_hour <- lubridate::hour(bike_rides$ended_at)
 
+bike_rides$date <- as.Date(bike_rides$started_at)
+bike_rides$end_date <- as.Date(bike_rides$ended_at)
 
+bike_rides$month <- format(as.Date(bike_rides$date),"%m")
+bike_rides$day <- format(as.Date(bike_rides$date),"%d")
+bike_rides$year <- format(as.Date(bike_rides$date),"%Y")
+bike_rides$day_of_week <- format(as.Date(bike_rides$date),"%A")
+```
 
+Added a column representing the duration of each trip in seconds, then changed it to the correct data type.
 
+```
+bike_rides$ride_length_seconds <- difftime(bike_rides$ended_at,bike_rides$started_at)
+bike_rides$ride_length_seconds <- as.numeric(as.character(bike_rides$ride_length_seconds))
+```
 
+It was specified by the source that certain data was faulty/irrelevant, so I removed it and created a separate, final dataframe called **bike_rides_v2**.
 
+```
+bike_rides_v2 <- bike_rides[!(bike_rides$start_station_name == "HQ QR" | bike_rides$ride_length_seconds<0),]
+```
+
+Finally, I corrected the order of the days of the week so my visualizations would be more intuitive.
+
+```
+bike_rides_v2$day_of_week <- ordered(bike_rides_v2$day_of_week, levels=c("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"))
+```
+
+Now, onto the analysis!
 
 
 
