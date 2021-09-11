@@ -14,7 +14,19 @@ The datasets I used are public and can be found in the [Archive folder](https://
 
 ## Preparation and Cleaning
 
-First, I imported all of the .csv files, added them to separate dataframes, and combined them into one dataframe called **bike_rides**.
+First, I installed and loaded all of the necessary packages for preparing and cleaning the data.
+
+```
+install.packages("tidyverse")
+install.packages("janitor")
+install.packages("lubridate")
+library(tidyverse)
+library(janitor)
+library(lubridate)
+library(scales)
+```
+
+Then I imported all of the .csv files, added them to separate dataframes, and combined them into one dataframe called **bike_rides**.
 
 ```
 df1 <- read.csv("./Data/202004-divvy-tripdata.csv")
@@ -32,5 +44,33 @@ df12 <- read.csv("./Data/202103-divvy-tripdata.csv")
 
 bike_rides <- rbind(df1,df2,df3,df4,df5,df6,df7,df8,df9,df10,df11,df12)
 ```
+
+The first step I took to clean the data was removing any empty rows or columns from **bike_rides**.
+
+```
+bike_rides <- janitor::remove_empty(bike_rides,which = c("cols"))
+bike_rides <- janitor::remove_empty(bike_rides,which = c("rows"))
+```
+Since the **started_at** and **ended_at** columns represent dates, I converted them into the correct data type.
+
+```
+bike_rides$started_at <- lubridate::ymd_hms(bike_rides$started_at)
+bike_rides$ended_at <- lubridate::ymd_hms(bike_rides$ended_at)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
