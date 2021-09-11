@@ -1,13 +1,10 @@
 ---
 title: "Bikeshare Case Study"
-author: "Aaron Joslin-Wangdu"
-output: html_document
+author: "By Aaron Joslin-Wangdu"
+output: rmarkdown::github_document
 ---
-&nbsp;
 
 # Introduction
-
----
 
 For this case study I am going to be analyzing data from [Divvy,](https://www.divvybikes.com) a bike share program based in Chicago. Divvy has a fleet of nearly 6,000 bicycles which are geotracked and rode within a network of 692 stations throughout Chicago. This case study was my Capstone project for the Google Data Analytics Professional Certificate, and was done entirely in RStudio.
 
@@ -19,13 +16,10 @@ The questions that I am using to quide my study are:
 
 ## The Data
 
----
-
 The datasets I used are public and can be found in the [Archive folder](https://github.com/aaronjoslinwangdu/bike-share-case-study/tree/master/Archive), as well as [here](https://divvy-tripdata.s3.amazonaws.com/index.html). The data has been made available by Motivate International Inc. under this [license](https://www.divvybikes.com/data-license-agreement).
 
 ## Preparation and Cleaning
 
----
 
 First, I installed and loaded all of the necessary packages for preparing and cleaning the data.
 
@@ -110,7 +104,6 @@ Now, onto the analysis!
 
 ## Analysis
 
----
 
 One of my goals was to find the differences in use between members and casual riders, so let's look into that first.
 
