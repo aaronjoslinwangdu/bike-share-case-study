@@ -4,7 +4,7 @@ For this case study I am going to be analyzing data from [Divvy,](https://www.di
 
 ## What is the point of this case study?
 
-The questions that I am using to quide my study are:
+The questions that I am using to guide my study are:
 1. How do annual members and casual riders use Divvy bikes differently?
 2. Why would casual riders buy Divvy annual membership?
 
@@ -97,14 +97,40 @@ Now, onto the analysis!
 
 ## Analysis
 
-One of my goals was to find the differences in use between members and casual riders, so let's look into that first.
-
-First, I checked the mean, median, max, and min of the ride lengths.
-
 ```
+#check mean, median, max, min of ride_length_seconds
+
 summary(bike_rides_v2$ride_length_seconds)
+
+#compare above measures between members and casual users
+
+aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = mean)
+aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = median)
+aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = max)
+aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = min)
+
+#find average ride time by each day for members vs. casual
+
+aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual + bike_rides_v2$day_of_week, FUN = mean)
+
+#analyze ridership data by type and weekday
+
+bike_rides_v2 %>% 
+  mutate(weekday = wday(started_at,label = TRUE)) %>%  #creates weekday field using wday()
+  group_by(member_casual,weekday) %>%  #groups by user type and weekday
+  summarize(number_of_rides = n(), average_duration = mean(ride_length_seconds)) %>%  #calculations
+  arrange(weekday)  
 ```
 
+## Visualizations
+
+![avg_duration_per_day](https://github.com/aaronjoslinwangdu/bike-share-case-study/blob/master/Visualizations/avg_duration_per_day.png)
+---
+![number_of_rides_by_rider_type](https://github.com/aaronjoslinwangdu/bike-share-case-study/blob/master/Visualizations/number_of_rides_by_rider_type.png)
+---
+![rides_every_hour](https://github.com/aaronjoslinwangdu/bike-share-case-study/blob/master/Visualizations/rides_every_hour.png)
+
+## Conclusion
 
 
 
