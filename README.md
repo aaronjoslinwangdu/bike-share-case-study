@@ -97,12 +97,31 @@ Now, onto the analysis!
 
 ## Analysis
 
-One of my goals was to find the differences in use between members and casual riders, so let's look into that first.
-
-First, I checked the mean, median, max, and min of the ride lengths.
+Here is the analysis that I did, refer to the comments.
 
 ```
+#check mean, median, max, min of ride_length_seconds
+
 summary(bike_rides_v2$ride_length_seconds)
+
+#compare above measures between members and casual users
+
+aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = mean)
+aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = median)
+aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = max)
+aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = min)
+
+#find average ride time by each day for members vs. casual
+
+aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual + bike_rides_v2$day_of_week, FUN = mean)
+
+#analyze ridership data by type and weekday
+
+bike_rides_v2 %>% 
+  mutate(weekday = wday(started_at,label = TRUE)) %>%  #creates weekday field using wday()
+  group_by(member_casual,weekday) %>%  #groups by user type and weekday
+  summarize(number_of_rides = n(), average_duration = mean(ride_length_seconds)) %>%  #calculations
+  arrange(weekday)  
 ```
 
 
