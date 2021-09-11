@@ -1,5 +1,3 @@
-# Divvy Case Study
-
 ## Introduction
 
 For this case study I am going to be analyzing data from [Divvy,](https://www.divvybikes.com) a bike share program based in Chicago. Divvy
