@@ -108,6 +108,16 @@ bike_rides_v2 %>%
   summarize(number_of_rides = n(), average_duration = mean(ride_length_seconds)) %>%  #calculations
   arrange(weekday)  
 
+#analyze how many trips there are each day with each type of bike for members vs. casuals
+
+bike_rides_v2 %>% 
+  count(member_casual,day_of_week, rideable_type)
+
+#check how the times that casuals/members start trips are different
+
+bike_rides_v2 %>% 
+  count(member_casual,start_hour)
+
 ### VISUALIZATIONS ###
 
 
