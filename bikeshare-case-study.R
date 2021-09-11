@@ -75,15 +75,13 @@ bike_rides$ride_length_seconds <- as.numeric(as.character(bike_rides$ride_length
 
 #remove irrelevant data where bikes were being checked/ride length was negative
 
-bike_rides_v2 <- bike_rides[!(bike_rides$start_station_name == "HQ QR" | bike_rides$ride_length_seconds<0),]
+bike_rides_v2 <- bike_rides[!(bike_rides$start_station_name == "HQ QR" | bike_rides$ride_length_seconds<0 | bike_rides$ride_length_seconds>604800),]
 
 #change the order of days of the week to be correct
 
 bike_rides_v2$day_of_week <- ordered(bike_rides_v2$day_of_week, levels=c("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"))
 
 #this is now our cleaned dataset
-
-
 
 ### ANALYSIS ###
 
