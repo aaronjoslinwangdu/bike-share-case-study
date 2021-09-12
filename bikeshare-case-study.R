@@ -130,6 +130,12 @@ bike_rides_v2 %>%
 bike_rides_v2 %>% 
   count(member_casual,start_hour)
 
+
+
+
+
+
+
 ### VISUALIZATIONS ###
 
 

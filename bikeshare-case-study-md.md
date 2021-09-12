@@ -110,6 +110,21 @@ visualizations would be more intuitive.
 bike_rides_v2$day_of_week <- ordered(bike_rides_v2$day_of_week, levels=c("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"))
 ```
 
+Now that we have the final dataframe, here are all of the column names.
+
+``` r
+colnames(bike_rides_v2)
+```
+
+    ##  [1] "ride_id"             "rideable_type"       "started_at"         
+    ##  [4] "ended_at"            "start_station_name"  "start_station_id"   
+    ##  [7] "end_station_name"    "end_station_id"      "start_lat"          
+    ## [10] "start_lng"           "end_lat"             "end_lng"            
+    ## [13] "member_casual"       "start_hour"          "end_hour"           
+    ## [16] "date"                "end_date"            "month"              
+    ## [19] "day"                 "year"                "day_of_week"        
+    ## [22] "ride_length_seconds"
+
 ## Analysis
 
 First, I wanted to see how many total rides members and casual users
