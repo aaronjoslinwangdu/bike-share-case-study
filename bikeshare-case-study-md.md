@@ -1,7 +1,7 @@
 Bikeshare Case Study
 ================
-By Aaron Joslin-Wangdu -
-9/11/2021
+By Aaron Joslin-Wangdu on
+9/9/2021
 
 # Introduction
 
@@ -17,7 +17,7 @@ Certificate, and was done entirely in RStudio.
 The questions that I am using to guide my study are:  
 1. How do annual members and casual riders use Divvy bikes
 differently?  
-2. Why would casual riders buy Divvy annual membership?
+2. How can Divvy influence casual riders to become members?
 
 ## The Data
 
@@ -119,8 +119,6 @@ visualizations would be more intuitive.
 bike_rides_v2$day_of_week <- ordered(bike_rides_v2$day_of_week, levels=c("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"))
 ```
 
-Now, onto the analysis!
-
 ## Analysis
 
 First, I wanted to see how many total rides members and casual users
@@ -177,7 +175,7 @@ summary(bike_rides_v2$ride_length_seconds)
     ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
     ##       0     476     874    1557    1601  602760
 
-Compare the above measures between members and casual users
+Compare the above measures between members and casual users.
 
 ``` r
 setNames(aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casual, FUN = mean),c("Membership Type","Mean Ride Length (seconds)"))
@@ -233,7 +231,7 @@ setNames(aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casu
     ## 13          casual  Saturday                 2573.4333
     ## 14          member  Saturday                 1054.5039
 
-Here, we analyze ridership data by type and weekday
+Here, we analyze ridership data by type and weekday.
 
 ``` r
 bike_rides_v2 %>% 
@@ -382,12 +380,34 @@ over two times longer on average compared to users with memberships.
 
 ![number\_of\_rides\_by\_rider\_type](https://github.com/aaronjoslinwangdu/bike-share-case-study/blob/master/Visualizations/number_of_rides_by_rider_type.png)
 
-\#\#\#Here, we observe a few things: \* Both casual users and members
-use docked bikes much more than the other two available types. \* The
-number of rides per day for members does not vary heavily throughout the
-week, with only a slight increase as the week progresses. \* Casual
-users ride much more often on weekends, especially Saturday.
+By looking at this chart we can observe a few things.First off, both
+casual users and members use docked bikes much more than the other two
+available types. Also, the number of rides per day for members does not
+vary heavily throughout the week, with only a slight increase as the
+week progresses. Lastly, we can see that casual users ride much more
+often on weekends, especially Saturday.
 
 ![rides\_every\_hour](https://github.com/aaronjoslinwangdu/bike-share-case-study/blob/master/Visualizations/rides_every_hour.png)
 
-## Conclusion
+Here we can see that the number of trips that members take spike at 8am
+and 6pm, while the casual riders steadily increase the amount of trips
+that they take throughout the day.
+
+## Conclusion and Recommendations
+
+Now that I’ve walked through the data analysis process, I can list some
+key observations that would help to answer the business questions
+mentioned in the introduction.
+
+These key observations are:  
+1. Casual riders ride more often on the weekend than during the week.  
+2. Casual riders on average take longer lasting trips than members.  
+3. The number of rides by casual riders surpasses the number of rides by
+members on Saturday.  
+4. Members use their bikes often around 8am and 6pm, possibly indicating
+using Divvy services for work transportation.  
+
+My recommendations for Divvy based on these observations are:  
+1. Creating an alternate membership type that caters toward weekend
+users.  
+2. Advertising Divvy as an alternative to driving your car to work.
