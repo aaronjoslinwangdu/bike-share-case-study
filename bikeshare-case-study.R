@@ -81,7 +81,9 @@ bike_rides_v2 <- bike_rides[!(bike_rides$start_station_name == "HQ QR" | bike_ri
 
 bike_rides_v2$day_of_week <- ordered(bike_rides_v2$day_of_week, levels=c("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"))
 
-#this is now our cleaned dataset
+#this is now our cleaned dataset, lets display it
+
+colnames(bike_rides_v2)
 
 ### ANALYSIS ###
 
