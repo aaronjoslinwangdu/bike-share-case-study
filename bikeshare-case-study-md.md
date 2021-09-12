@@ -403,7 +403,7 @@ Here we can see that the number of trips that members take spike at 8am
 and 6pm, while the casual riders steadily increase the amount of trips
 that they take throughout the day.
 
-## Conclusion and Recommendations
+## Conclusion
 
 Now that I’ve walked through the data analysis process, I can list some
 key observations that would help to answer the business questions
