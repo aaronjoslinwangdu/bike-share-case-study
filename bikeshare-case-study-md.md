@@ -3,15 +3,6 @@ Bikeshare Case Study
 By Aaron Joslin-Wangdu on
 9/9/2021
 
-# Introduction
-
-For this case study I am going to be analyzing data from
-[Divvy,](https://www.divvybikes.com) a bike share program based in
-Chicago. Divvy has a fleet of nearly 6,000 bicycles which are geotracked
-and rode within a network of 692 stations throughout Chicago. This case
-study was my Capstone project for the Google Data Analytics Professional
-Certificate, and was done entirely in RStudio.
-
 ## What is the point of this case study?
 
 The questions that I am using to guide my study are:  
@@ -378,14 +369,18 @@ bike_rides_v2 %>%
 From this visualization we can clearly see that casual Divvy users ride
 over two times longer on average compared to users with memberships.
 
+ 
+
 ![number\_of\_rides\_by\_rider\_type](https://github.com/aaronjoslinwangdu/bike-share-case-study/blob/master/Visualizations/number_of_rides_by_rider_type.png)
 
-By looking at this chart we can observe a few things.First off, both
+By looking at this chart we can observe a few things. First off, both
 casual users and members use docked bikes much more than the other two
 available types. Also, the number of rides per day for members does not
 vary heavily throughout the week, with only a slight increase as the
 week progresses. Lastly, we can see that casual users ride much more
 often on weekends, especially Saturday.
+
+ 
 
 ![rides\_every\_hour](https://github.com/aaronjoslinwangdu/bike-share-case-study/blob/master/Visualizations/rides_every_hour.png)
 
