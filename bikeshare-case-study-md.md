@@ -14,9 +14,10 @@ Certificate, and was done entirely in RStudio.
 
 ## What is the point of this case study?
 
-The questions that I am using to guide my study are: 1. How do annual
-members and casual riders use Divvy bikes differently? 2. Why would
-casual riders buy Divvy annual membership?
+The questions that I am using to guide my study are:  
+1. How do annual members and casual riders use Divvy bikes
+differently?  
+2. Why would casual riders buy Divvy annual membership?
 
 ## The Data
 
@@ -121,6 +122,51 @@ bike_rides_v2$day_of_week <- ordered(bike_rides_v2$day_of_week, levels=c("Sunday
 Now, onto the analysis!
 
 ## Analysis
+
+First, I wanted to see how many total rides members and casual users
+took throughout the whole time period.
+
+``` r
+bike_rides_v2 %>% 
+  count(member_casual)
+```
+
+    ##   member_casual       n
+    ## 1        casual 1426826
+    ## 2        member 2052056
+
+Now check the number of total rides per month for each group.
+
+``` r
+bike_rides_v2 %>% 
+  count(month,member_casual)
+```
+
+    ##    month member_casual      n
+    ## 1     01        casual  18116
+    ## 2     01        member  78715
+    ## 3     02        casual  10129
+    ## 4     02        member  39491
+    ## 5     03        casual  84018
+    ## 6     03        member 144462
+    ## 7     04        casual  23592
+    ## 8     04        member  61111
+    ## 9     05        casual  86833
+    ## 10    05        member 113258
+    ## 11    06        casual 154522
+    ## 12    06        member 187984
+    ## 13    07        casual 268574
+    ## 14    07        member 281044
+    ## 15    08        casual 288580
+    ## 16    08        member 330947
+    ## 17    09        casual 230041
+    ## 18    09        member 300749
+    ## 19    10        casual 144520
+    ## 20    10        member 242213
+    ## 21    11        casual  87904
+    ## 22    11        member 170940
+    ## 23    12        casual  29997
+    ## 24    12        member 101142
 
 Check the mean, median, max, min of **ride\_length\_seconds**.
 
@@ -329,10 +375,19 @@ bike_rides_v2 %>%
 
 ## Visualizations
 
-## ![avg\_duration\_per\_day](https://github.com/aaronjoslinwangdu/bike-share-case-study/blob/master/Visualizations/avg_duration_per_day.png)
+![avg\_duration\_per\_day](https://github.com/aaronjoslinwangdu/bike-share-case-study/blob/master/Visualizations/avg_duration_per_day.png)
 
-## ![number\_of\_rides\_by\_rider\_type](https://github.com/aaronjoslinwangdu/bike-share-case-study/blob/master/Visualizations/number_of_rides_by_rider_type.png)
+From this visualization we can clearly see that casual Divvy users ride
+over two times longer on average compared to users with memberships.
 
-## ![rides\_every\_hour](https://github.com/aaronjoslinwangdu/bike-share-case-study/blob/master/Visualizations/rides_every_hour.png)
+![number\_of\_rides\_by\_rider\_type](https://github.com/aaronjoslinwangdu/bike-share-case-study/blob/master/Visualizations/number_of_rides_by_rider_type.png)
+
+\#\#\#Here, we observe a few things: \* Both casual users and members
+use docked bikes much more than the other two available types. \* The
+number of rides per day for members does not vary heavily throughout the
+week, with only a slight increase as the week progresses. \* Casual
+users ride much more often on weekends, especially Saturday.
+
+![rides\_every\_hour](https://github.com/aaronjoslinwangdu/bike-share-case-study/blob/master/Visualizations/rides_every_hour.png)
 
 ## Conclusion

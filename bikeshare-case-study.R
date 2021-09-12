@@ -85,6 +85,16 @@ bike_rides_v2$day_of_week <- ordered(bike_rides_v2$day_of_week, levels=c("Sunday
 
 ### ANALYSIS ###
 
+#count number of trips members and casuals made
+
+bike_rides_v2 %>% 
+  count(member_casual)
+
+#now check this per month
+
+bike_rides_v2 %>% 
+  count(month,member_casual)
+
 #check mean, median, max, min of ride_length_seconds
 
 summary(bike_rides_v2$ride_length_seconds)
