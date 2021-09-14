@@ -4,7 +4,7 @@ For this case study I am going to be analyzing data from [Divvy,](https://www.di
 
 To view the comprehensive markdown file, please click [here](https://github.com/aaronjoslinwangdu/bike-share-case-study/blob/master/bikeshare-case-study-md.md).
 
-Last edited on 9/11/2021.
+Last edited on 9/12/2021.
 
 
 
