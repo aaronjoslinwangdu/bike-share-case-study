@@ -5,14 +5,15 @@ By Aaron Joslin-Wangdu on
 
 ## What is the point of this case study?
 
-The questions that I am using to guide my study are:  
+The questions used to guide this case study are:  
 1. How do annual members and casual riders use Divvy bikes
 differently?  
 2. How can Divvy influence casual riders to become members?
 
 ## The Data
 
-The datasets I used are public and can be found in the [Archive
+The datasets used in this case study are public and can be found in the
+[Archive
 folder](https://github.com/aaronjoslinwangdu/bike-share-case-study/tree/master/Archive),
 as well as [here](https://divvy-tripdata.s3.amazonaws.com/index.html).
 The data has been made available by Motivate International Inc. under
@@ -20,8 +21,8 @@ this [license](https://www.divvybikes.com/data-license-agreement).
 
 ## Preparation and Cleaning
 
-First, I installed and loaded all of the necessary packages for
-preparing and cleaning the data.
+First, install and load all of the necessary packages for preparing and
+cleaning the data.
 
 ``` r
 install.packages("tidyverse",repos = 'http://cran.us.r-project.org')
@@ -33,8 +34,8 @@ library(lubridate)
 library(scales)
 ```
 
-Then I imported all of the .csv files, added them to separate
-dataframes, and combined them into one dataframe called **bike\_rides**.
+Then, import all of the .csv files, add them to separate dataframes, and
+combine them into one dataframe called **bike\_rides**.
 
 ``` r
 df1 <- read.csv("./Data/202004-divvy-tripdata.csv")
@@ -53,7 +54,7 @@ df12 <- read.csv("./Data/202103-divvy-tripdata.csv")
 bike_rides <- rbind(df1,df2,df3,df4,df5,df6,df7,df8,df9,df10,df11,df12)
 ```
 
-The first step I took to clean the data was removing any empty rows or
+The first step taken to clean the data was removing any empty rows or
 columns from **bike\_rides**.
 
 ``` r
@@ -61,17 +62,17 @@ bike_rides <- janitor::remove_empty(bike_rides,which = c("cols"))
 bike_rides <- janitor::remove_empty(bike_rides,which = c("rows"))
 ```
 
-Since the **started\_at** and **ended\_at** columns represent dates, I
-converted them into the correct data type.
+Since the **started\_at** and **ended\_at** columns represent dates,
+convert them into the correct data type.
 
 ``` r
 bike_rides$started_at <- lubridate::ymd_hms(bike_rides$started_at)
 bike_rides$ended_at <- lubridate::ymd_hms(bike_rides$ended_at)
 ```
 
-Then I used the **started\_at** and **ended\_at** columns to create
-separate columns for the day of the week, starting hour, month, etc.
-that each trip occurred on.
+Use the **started\_at** and **ended\_at** columns to create separate
+columns for the day of the week, starting hour, month, etc. that each
+trip occurred on.
 
 ``` r
 bike_rides$start_hour <- lubridate::hour(bike_rides$started_at)
@@ -86,8 +87,8 @@ bike_rides$year <- format(as.Date(bike_rides$date),"%Y")
 bike_rides$day_of_week <- format(as.Date(bike_rides$date),"%A")
 ```
 
-Added a column representing the duration of each trip in seconds, then
-changed it to the correct data type.
+Add a column representing the duration of each trip in seconds, then
+change it to the correct data type.
 
 ``` r
 bike_rides$ride_length_seconds <- difftime(bike_rides$ended_at,bike_rides$started_at)
@@ -95,22 +96,22 @@ bike_rides$ride_length_seconds <- as.numeric(as.character(bike_rides$ride_length
 ```
 
 It was specified by the source that certain data was faulty/irrelevant,
-so I removed that data as well as negative/extremely high values for
-**ride\_length\_seconds** and created a separate, final dataframe called
-**bike\_rides\_v2**.
+so that data should be removed as well as negative/extremely high values
+for **ride\_length\_seconds**. Then, create a separate, final dataframe
+called **bike\_rides\_v2**.
 
 ``` r
 bike_rides_v2 <- bike_rides[!(bike_rides$start_station_name == "HQ QR" | bike_rides$ride_length_seconds<0 | bike_rides$ride_length_seconds>604800),]
 ```
 
-Finally, I corrected the order of the days of the week so my
-visualizations would be more intuitive.
+Finally, correct the order of the days of the week so the visualization
+labels would be more intuitive.
 
 ``` r
 bike_rides_v2$day_of_week <- ordered(bike_rides_v2$day_of_week, levels=c("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"))
 ```
 
-Now that we have the final dataframe, here are all of the column names.
+List all of the column names for clarity.
 
 ``` r
 colnames(bike_rides_v2)
@@ -127,8 +128,8 @@ colnames(bike_rides_v2)
 
 ## Analysis
 
-First, I wanted to see how many total rides members and casual users
-took throughout the whole time period.
+First, check how many total rides members and casual users took
+throughout the whole time period.
 
 ``` r
 bike_rides_v2 %>% 
@@ -237,7 +238,7 @@ setNames(aggregate(bike_rides_v2$ride_length_seconds ~ bike_rides_v2$member_casu
     ## 13          casual  Saturday                 2573.4333
     ## 14          member  Saturday                 1054.5039
 
-Here, we analyze ridership data by type and weekday.
+Analyze ridership data by type and weekday.
 
 ``` r
 bike_rides_v2 %>% 
@@ -403,11 +404,25 @@ Here we can see that the number of trips that members take spike at 8am
 and 6pm, while the casual riders steadily increase the amount of trips
 that they take throughout the day.
 
+## Difficulties
+
+Some shortcomings in this case study include:  
+1. Didn’t analyze the length of rides in terms of distance.  
+2. Didn’t include analysis done on starting/ending stations since it was
+inconclusive.  
+3. Hourly ride visual was not as clear as intended.
+
+Steps being taken to fix these shortcomings:  
+1. Perform further analysis on differences between casual/member ride
+distances.  
+2. Test different methods of analysis using starting/ending station
+data.  
+3. Improve plotting methods for the “Rides Every Hour” visual.
+
 ## Conclusion
 
-Now that I’ve walked through the data analysis process, I can list some
-key observations that would help to answer the business questions
-mentioned in the introduction.
+From the analysis and visualizations the most insightful information
+gained from this dataset can be condensed into a few key observations.
 
 These key observations are:  
 1. Casual riders ride more often on the weekend than during the week.  
