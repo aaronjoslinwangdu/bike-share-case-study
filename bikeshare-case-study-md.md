@@ -3,6 +3,10 @@ Bikeshare Case Study
 By Aaron Joslin-Wangdu on
 9/9/2021
 
+## Introduction
+
+For this case study I am going to be analyzing data from [Divvy,](https://www.divvybikes.com) a bike share program based in Chicago. Divvy has a fleet of nearly 6,000 bicycles which are geotracked and rode within a network of 692 stations throughout Chicago. This case study was my Capstone project for the Google Data Analytics Professional Certificate, and was done entirely in RStudio.
+
 ## What is the point of this case study?
 
 The questions used to guide this case study are:  
